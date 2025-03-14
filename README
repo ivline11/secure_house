@@ -1,3 +1,12 @@
 NAME : KANG TAEJEONG
 STUDENT ID : 2021147555
-Description : This rust program.
+Description : This rust program is for CAS4109 hw1 : secure_house. 
+This code initializes HouseState. lock_state is initially true and inserted_key is initially None.
+Check_key function checks whether inserted key is authorized or not. reset_lock_state function resets inserted_key and lock_state.
+Insert_key function inserts key and updates inserted_key variable.
+Turn_key function uses check_key function to find out whether inserted key is authorized. If the key is authorized, access allowed.
+After turn_key, enter_house happens. Only single person can enter the house same time.
+Furthermore, people_inside_house function returns every member in the house.
+rekey function sets new authorized keys and this can be only authorized by house's owner and also only when owner is in the house.
+leave_house function makes people who are in the house leaves the house
+function main checks test script with whitespace.
