@@ -2,10 +2,10 @@
 use std::env;
 //for 강제종료
 use std::process::exit;
-//긴문자 사용하기 위해서
+//input output 
 use std::io;
 use std::io::BufRead;
-//cheat key
+//firefighter key
 static FIREFIGHTER_KEY: &str = "FIREFIGHTER_SECRET_KEY";
 
 //struct
@@ -125,28 +125,30 @@ fn main() {
         &[]
     };
 
+    //house initialization
     let mut house = HouseState::initialization(owner, initial_keys);
 
+    
     let stdin = io::stdin();
     for line_res in stdin.lock().lines() {
         let line = match line_res {
             Ok(l) => l,
             Err(_) => break,
         };
-        // Trim trailing whitespace
+        //공백찾기
         let trimmed = line.trim();
         if trimmed.is_empty() {
-            // Empty line -> terminate the program
+            //오류나면 error 
             break;
         }
 
-        // Split into tokens
+        //공백에 따라 명령어 구분하기
         let tokens: Vec<&str> = trimmed.split_whitespace().collect();
         if tokens.is_empty() {
             println!("ERROR");
             continue;
         }
-        // 1) INSERT KEY
+        //insert_key
         if tokens.len() == 4
             && tokens[0] == "INSERT"
             && tokens[1] == "KEY"
@@ -157,7 +159,7 @@ fn main() {
             continue;
         }
 
-        // 2) TURN KEY
+        //turn_key
         if tokens.len() == 3
             && tokens[0] == "TURN"
             && tokens[1] == "KEY"
@@ -167,7 +169,7 @@ fn main() {
             continue;
         }
 
-        // 3) ENTER HOUSE
+        //enter_house
         if tokens.len() == 3
             && tokens[0] == "ENTER"
             && tokens[1] == "HOUSE"
@@ -177,7 +179,7 @@ fn main() {
             continue;
         }
 
-        // 4) WHO'S INSIDE?
+        //who's inside?
         if tokens.len() == 2
             && tokens[0] == "WHO'S"
             && tokens[1] == "INSIDE?"
@@ -186,7 +188,7 @@ fn main() {
             continue;
         }
 
-        // 5) CHANGE LOCKS
+        //rekey
         if tokens.len() >= 3
             && tokens[0] == "CHANGE"
             && tokens[1] == "LOCKS"
@@ -198,7 +200,7 @@ fn main() {
             continue;
         }
 
-        // 6) LEAVE HOUSE 
+        //leave_house 
         if tokens.len() == 3
             && tokens[0] == "LEAVE"
             && tokens[1] == "HOUSE"
